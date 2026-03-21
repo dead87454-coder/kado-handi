@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Kak Handi! ✈️🇦🇪</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+        }
+
+        h1 { color: #ffd700; margin-bottom: 10px; }
+        p { font-size: 1.1em; line-height: 1.6; }
+
+        .plane-anim {
+            font-size: 40px;
+            display: inline-block;
+            animation: fly 3s infinite linear;
+        }
+
+        @keyframes fly {
+            0% { transform: translateX(-150px) translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(150px) translateY(-20px); opacity: 0; }
+        }
+
+        .btn-coklat {
+            background: #7b3f00;
+            color: #ffd700;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-coklat:hover {
+            transform: scale(1.1);
+            background: #5d2e00;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        .dubai-text { font-weight: bold; color: #ffd700; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="plane-anim">✈️</div>
+        <h1>Happy Birthday,<br>Kak Handi! 🥳</h1>
+        <p>Semoga harinya seru terus, rezekinya melimpah, dan pastinya...</p>
+        <p class="dubai-text">✈️ SEMOGA SELALU KE DUBAI! ✈️</p>
+        <p>Udah siap makan coklat Dubai-nya belum?</p>
+        
+        <button class="btn-coklat" onclick="klaimCoklat()">🍫 KLAIM COKLAT DUBAI</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function klaimCoklat() {
+            // Efek Konfeti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffd700', '#ffffff', '#7b3f00']
+            });
+
+            setTimeout(() => {
+                alert("Permintaan Terkirim! \n\nSyarat klaim: Kak Handi harus traktir dulu baru coklatnya cair! 😂");
+            }, 500);
+        }
+    </script>
+</body>
+</html>
