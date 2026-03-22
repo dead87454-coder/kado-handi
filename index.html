@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ucapan Ulang Tahun</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    transition: 0.8s;
+  }
+
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #layer1 { background: #ff6b81; }
+  #layer2 { background: #3742fa; }
+  #layer3 { background: #2ed573; }
+
+  /* 🎁 Gift box */
+  .gift {
+    font-size: 80px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .gift:hover {
+    transform: scale(1.2);
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- 🎁 Layer 1 -->
+<div class="layer" id="layer1">
+  <h1 id="text1"></h1>
+  <div class="gift" onclick="openGift()">🎁</div>
+  <p>Klik kado nya 😆</p>
+</div>
+
+<!-- 🎉 Layer 2 -->
+<div class="layer hidden" id="layer2">
+  <h1 id="text2"></h1>
+  <p id="text3"></p>
+  <p id="text4"></p>
+  <button onclick="nextLayer()">Lanjut</button>
+</div>
+
+<!-- 😆 Layer 3 -->
+<div class="layer hidden" id="layer3">
+  <h1 id="text5"></h1>
+  <p id="text6"></p>
+  <p id="text7"></p>
+</div>
+
+<!-- 🎵 Musik -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ✨ Typing effect
+function typeText(element, text, speed = 50) {
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  element.innerHTML = "";
+  typing();
+}
+
+// 🎁 Open gift
+function openGift() {
+  document.getElementById("layer1").classList.add("hidden");
+  document.getElementById("layer2").classList.remove("hidden");
+
+  document.getElementById("music").play();
+
+  typeText(text2, "🎉 Selamat Ulang Tahun Kak Handi 🎉");
+  setTimeout(() => typeText(text3, "Semoga selalu ke Dubai ✈️"), 1500);
+  setTimeout(() => typeText(text4, "Bolehla coklat Dubai jugo hehe 🍫😆"), 3000);
+
+  startConfetti();
+}
+
+// ➡️ Next layer
+function nextLayer() {
+  document.getElementById("layer2").classList.add("hidden");
+  document.getElementById("layer3").classList.remove("hidden");
+
+  typeText(text5, "😆 BTW");
+  setTimeout(() => typeText(text6, "Aku baru nian tau buat ini wkwk"), 1500);
+  setTimeout(() => typeText(text7, "Hal baru ini biso main coding 💻🔥"), 3000);
+}
+
+// 🎊 Confetti
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let confetti = [];
+
+function startConfetti() {
+  for (let i = 0; i < 150; i++) {
+    confetti.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 6 + 2,
+      d: Math.random() * 50,
+      color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+      tilt: Math.random() * 10 - 10
+    });
+  }
+  animateConfetti();
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  confetti.forEach((c, i) => {
+    ctx.beginPath();
+    ctx.fillStyle = c.color;
+    ctx.fillRect(c.x, c.y, c.r, c.r);
+
+    c.y += 2;
+    c.x += Math.sin(c.d);
+
+    if (c.y > canvas.height) {
+      confetti[i].y = 0;
+    }
+  });
+
+  requestAnimationFrame(animateConfetti);
+}
+
+// Initial text
+typeText(text1, "Bukaa Akoo 😆");
+</script>
+
+</body>
+</html>
